@@ -1,0 +1,31 @@
+{
+    "name": "swag/custom-rule",
+    "description": "Delivery Post Code Rule",
+    "version": "v1.0.0",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "shopware AG"
+        }
+    ],
+    "require": {
+        "shopware/core": "*"
+    },
+    "extra": {
+        "shopware-plugin-class": "Swag\\CustomRule\\CustomRule",
+        "label": {
+            "de-DE": "Delivery Post Code Rule",
+            "en-GB": "Delivery Post Code Rule"
+        },
+        "description": {
+            "de-DE": "Delivery Post Code Rule",
+            "en-GB": "Delivery Post Code Rule"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Swag\\CustomRule\\": "src/"
+        }
+    }
+}
