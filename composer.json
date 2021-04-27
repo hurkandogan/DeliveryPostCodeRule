@@ -1,19 +1,19 @@
 {
-    "name": "swag/custom-rule",
+    "name": "imc/delivery-rule",
     "description": "Delivery Post Code Rule",
     "version": "v1.0.0",
     "type": "shopware-platform-plugin",
     "license": "MIT",
     "authors": [
         {
-            "name": "shopware AG"
+            "name": "imc marketing & consult GmbH"
         }
     ],
     "require": {
         "shopware/core": "*"
     },
     "extra": {
-        "shopware-plugin-class": "Swag\\CustomRule\\CustomRule",
+        "shopware-plugin-class": "Swag\\CustomRule\\DeliveryRule",
         "label": {
             "de-DE": "Delivery Post Code Rule",
             "en-GB": "Delivery Post Code Rule"

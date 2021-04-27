@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Swag\CustomRule;
+namespace Imc\DeliveryRule;
 
 use Shopware\Core\Framework\Plugin;
 
-class CustomRule extends Plugin
+class DeliveryRule extends Plugin
 {
 
 }
