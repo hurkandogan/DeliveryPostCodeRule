@@ -13,8 +13,8 @@ use Symfony\Component\Validator\Constraints\Type;
 
 class DeliveryPostCodeRule extends Rule
 {
-    protected String $zipCodeFrom;
-    protected String $zipCodeTo;
+    protected $zipCodeFrom;
+    protected $zipCodeTo;
 
     public function __construct(String $zipCodeFrom = "", String $zipCodeTo = "")
     {
@@ -35,7 +35,7 @@ class DeliveryPostCodeRule extends Rule
 
         $zipCode = intVal($location->getZipCode());
 
-        if($this->zipCodeFrom && $this->zipCodeTo && $zipCode){
+        if(!empty($this->zipCodeFrom) && !empty($this->zipCodeTo) && !empty($zipCode)){
             $zipCodeFromAsInt = intval($this->zipCodeFrom);
             $zipCodeToNumberAsInt = intval($this->zipCodeTo);
         } else {
@@ -54,7 +54,6 @@ class DeliveryPostCodeRule extends Rule
         return [
             'zipCodeFrom' => [new NotBlank(), new Type('string')],
             'zipCodeTo' => [new NotBlank(), new Type('string')],
-            'isLunarEclipse' => [ new Type('bool') ]
         ];
     }
 
