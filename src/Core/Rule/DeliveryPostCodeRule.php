@@ -11,8 +11,8 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 class DeliveryPostCodeRule extends Rule {
-    protected $zipCodeFrom;
-    protected $zipCodeTo;
+    private $zipCodeFrom;
+    private $zipCodeTo;
 
     public function __construct($zipCodeFrom = 0, $zipCodeTo = 0) {
         parent::__construct();
