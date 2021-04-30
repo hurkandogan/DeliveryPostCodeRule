@@ -6,25 +6,22 @@ use Shopware\Core\Checkout\CheckoutRuleScope;
 use Shopware\Core\Framework\Rule\Rule;
 use Shopware\Core\Framework\Rule\RuleScope;
 use Symfony\Component\Validator\Constraint;
-use Symfony\Component\Validator\Constraint as DateTimeConstraint;
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
-class DeliveryPostCodeRule extends Rule
-{
+class DeliveryPostCodeRule extends Rule {
     protected $zipCodeFrom;
     protected $zipCodeTo;
 
-    public function __construct(String $zipCodeFrom = "", String $zipCodeTo = "")
-    {
+    public function __construct($zipCodeFrom = 0, $zipCodeTo = 0) {
         parent::__construct();
         $this->zipCodeFrom = $zipCodeFrom;
         $this->zipCodeTo = $zipCodeTo;
     }
 
-    public function match(RuleScope $scope): bool
-    {
+    public function match(RuleScope $scope): bool {
+
         if (!$scope instanceof CheckoutRuleScope) {
             return false;
         }
@@ -32,33 +29,32 @@ class DeliveryPostCodeRule extends Rule
         if (!$location = $scope->getSalesChannelContext()->getShippingLocation()->getAddress()) {
             return false;
         }
+        // Validation
+        if($this->zipCodeFrom < $this->zipCodeTo){
+            return false;
+        }
 
         $zipCode = intVal($location->getZipCode());
 
-        if(!empty($this->zipCodeFrom) && !empty($this->zipCodeTo) && !empty($zipCode)){
-            $zipCodeFromAsInt = intval($this->zipCodeFrom);
-            $zipCodeToNumberAsInt = intval($this->zipCodeTo);
-        } else {
-            return false;
-        }
+        $zipCodeFromInt = intVal($this->zipCodeFrom);
+        $zipCodeToInt = intVal($this->zipCodeTo);
 
-        if($zipCode >= $zipCodeFromAsInt && $zipCode <= $zipCodeToNumberAsInt){
-            return true;
-        } else {
-            return false;
+        if(!empty($zipCode) && ($zipCodeFromInt > 0 && $zipCodeToInt > 0)){
+            if($zipCode >= $zipCodeFromInt && $zipCode <= $zipCodeToInt){
+                return true;
+            }
         }
-    }
+        return false;
+   }
 
-    public function getConstraints(): array
-    {
+    public function getConstraints(): array {
         return [
-            'zipCodeFrom' => [new NotBlank(), new Type('string')],
-            'zipCodeTo' => [new NotBlank(), new Type('string')],
+            'zipCodeFrom' => [new NotBlank(), new Type('int')],
+            'zipCodeTo' => [new NotBlank(), new Type('int')],
         ];
     }
 
-    public function getName(): string
-    {
+    public function getName(): string {
         return 'delivery_postcode_check';
     }
 }

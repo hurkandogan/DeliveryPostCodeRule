@@ -1,21 +1,19 @@
 {% block sw_condition_value_content %}
 <div>
     <sw-arrow-field>
-        <sw-text-field name="zip-code-from"
-                      id="zip-code-from"
-                      size="medium"
-                      v-model="zipCodeFrom"
-                      class="field--main">
-        </sw-text-field>
+        <sw-number-field size="medium"
+                         numberType="int"
+                        v-model="zipCodeFrom"
+                        class="field--main">
+        </sw-number-field>
     </sw-arrow-field>
 
     <sw-arrow-field>
-        <sw-text-field name="zip-code-to"
-                     id="zip-code-to"
-                     size="medium"
-                     v-model="zipCodeTo"
-                     class="field--main">
-        </sw-text-field>
+        <sw-number-field size="medium"
+                         numberType="int"
+                        v-model="zipCodeTo"
+                        class="field--main">
+        </sw-number-field>
     </sw-arrow-field>
 </div>
 {% endblock %}

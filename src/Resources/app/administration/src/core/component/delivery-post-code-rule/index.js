@@ -14,7 +14,6 @@ Component.extend('delivery-post-code-rule', 'sw-condition-base', {
             },
             set(zipCodeFrom) {
                 this.ensureValueExist();
-                console.log("testFrom: " + zipCodeFrom);
                 this.condition.value = { ...this.condition.value, zipCodeFrom };
             }
         },
@@ -25,7 +24,6 @@ Component.extend('delivery-post-code-rule', 'sw-condition-base', {
             },
             set(zipCodeTo) {
                 this.ensureValueExist();
-                console.log("testTo: " + zipCodeTo);
                 this.condition.value = { ...this.condition.value, zipCodeTo };
             }
         },
