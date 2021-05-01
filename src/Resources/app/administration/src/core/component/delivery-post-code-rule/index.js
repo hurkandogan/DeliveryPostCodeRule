@@ -34,5 +34,5 @@ Component.extend('delivery-post-code-rule', 'sw-condition-base', {
         currentError() {
             return this.conditionTypeError || this.conditionValueZipCodeFromError || this.conditionValueZipCodeToError;
             }
-        },
+        }
 });

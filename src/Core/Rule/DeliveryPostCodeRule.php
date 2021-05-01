@@ -11,13 +11,25 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 class DeliveryPostCodeRule extends Rule {
-    private $zipCodeFrom;
-    private $zipCodeTo;
 
-    public function __construct($zipCodeFrom = 0, $zipCodeTo = 0) {
+    /**
+     * @var String
+     */
+    protected $zipCodeFrom;
+    /**
+     * @var String
+     */
+    protected $zipCodeTo;
+
+    public function __construct(String $zipCodeFrom = null, String $zipCodeTo = null) {
+
         parent::__construct();
         $this->zipCodeFrom = $zipCodeFrom;
         $this->zipCodeTo = $zipCodeTo;
+    }
+
+    public function getName(): string {
+        return 'delivery_postcode_check';
     }
 
     public function match(RuleScope $scope): bool {
@@ -30,31 +42,30 @@ class DeliveryPostCodeRule extends Rule {
             return false;
         }
         // Validation
-        if($this->zipCodeFrom < $this->zipCodeTo){
+        if(!$this->zipCodeFrom < !$this->zipCodeTo){
             return false;
         }
-
         $zipCode = intVal($location->getZipCode());
+
+        if(!$this->zipCodeFrom && !$this->zipCodeTo && !empty($zipCode)){
+            return false;
+        }
 
         $zipCodeFromInt = intVal($this->zipCodeFrom);
         $zipCodeToInt = intVal($this->zipCodeTo);
 
-        if(!empty($zipCode) && ($zipCodeFromInt > 0 && $zipCodeToInt > 0)){
-            if($zipCode >= $zipCodeFromInt && $zipCode <= $zipCodeToInt){
-                return true;
-            }
+        if(($zipCodeFromInt > 0 && $zipCodeToInt > 0) &&
+            ($zipCode >= $zipCodeFromInt && $zipCode <= $zipCodeToInt)){
+            return true;
         }
         return false;
    }
 
     public function getConstraints(): array {
         return [
-            'zipCodeFrom' => [new NotBlank(), new Type('int')],
-            'zipCodeTo' => [new NotBlank(), new Type('int')],
+            'zipCodeFrom' => [new NotBlank(), new Type('String')],
+            'zipCodeTo' => [new NotBlank(), new Type('String')],
         ];
     }
 
-    public function getName(): string {
-        return 'delivery_postcode_check';
-    }
 }
