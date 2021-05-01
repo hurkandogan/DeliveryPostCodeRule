@@ -41,11 +41,12 @@ class DeliveryPostCodeRule extends Rule {
         if (!$location = $scope->getSalesChannelContext()->getShippingLocation()->getAddress()) {
             return false;
         }
-        // Validation
+
+        $zipCode = intVal($location->getZipCode());
+
         if(!$this->zipCodeFrom < !$this->zipCodeTo){
             return false;
         }
-        $zipCode = intVal($location->getZipCode());
 
         if(!$this->zipCodeFrom && !$this->zipCodeTo && !empty($zipCode)){
             return false;
