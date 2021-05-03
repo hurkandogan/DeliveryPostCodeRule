@@ -1,24 +1,22 @@
 {% block sw_condition_value_content %}
     <div>
-    {% block sw_text_field %}
-        <sw-text-field id="zip-code-from"
-                         name="zip-code-from"
-                       placeholder="Zip Code From"
+    {% block sw_text_field_from %}
+        <sw-arrow-field>
+        <sw-text-field placeholder="Zip Code From"
                         size="small"
                         v-model="zipCodeFrom"
-                        class="field--main"
-                        :disabled="disabled">
+                        class="field--main">
         </sw-text-field>
+        </sw-arrow-field>
         {% endblock %}
-{% block sw_text_field %}
-        <sw-text-field id="zip-code-to"
-                         name="zip-code-to"
-                       placeholder="Zip Code To"
+{% block sw_text_field_to %}
+        <sw-arrow-field>
+        <sw-text-field placeholder="Zip Code To"
                         size="small"
                         v-model="zipCodeTo"
-                        class="field--main"
-                       :disabled="disabled">
+                        class="field--main">
         </sw-text-field>
+        </sw-arrow-field>
 {% endblock %}
     </div>
 {% endblock %}
